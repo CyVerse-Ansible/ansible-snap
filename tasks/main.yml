@@ -1,0 +1,37 @@
+---
+
+- name: Create MAKER home dir
+  file:
+    path: "{{ MAKER_HOME }}"
+    state: directory
+
+- name: Downlaod SNAP
+  get_url:
+    url: "{{ SNAP_URL }}"
+    dest: "/tmp/snap-2013-11-29.tar.gz"
+
+- name: Unzip SNAP
+  unarchive:
+    src: "/tmp/snap-2013-11-29.tar.gz"
+    dest: "{{ MAKER_HOME }}"
+    remote_src: yes
+
+- name: Build SNAP
+  make:
+    chdir: "{{ MAKER_HOME }}/snap"
+  environment:
+    ZOE: "{{ MAKER_HOME }}/snap/Zoe"
+
+- name: Add SNAP to $PATH by adding line to bashrc
+  lineinfile:
+    path: "/home/{{ ATMOUSERNAME }}/.bashrc"
+    line: "export PATH=\"{{ MAKER_HOME }}/snap:$PATH\""
+    state: present
+    insertafter: EOF
+
+- name: Cleanup
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/snap-2013-11-29.tar.gz"
