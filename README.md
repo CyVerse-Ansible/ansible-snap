@@ -1,8 +1,7 @@
 # ansible-snap
 
-Installs [snap](http://bowtie-bio.sourceforge.net/snap/index.shtml)
+Installs [snap](https://wiki.gacrc.uga.edu/wiki/SNAP)
 
-[![Build Status](https://travis-ci.org/CyVerse-Ansible/ansible-snap.svg?branch=master)](https://travis-ci.org/CyVerse-Ansible/ansible-snap)
 
 ### Role Variables
 

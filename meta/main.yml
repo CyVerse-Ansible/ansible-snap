@@ -18,5 +18,6 @@ galaxy_info:
     - installer
     - genome
     - bioscience
+    - cyverse
 
 dependencies: []
